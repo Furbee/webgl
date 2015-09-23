@@ -65,7 +65,7 @@
 				var PI2 = Math.PI * 2;
 				var material = new THREE.SpriteCanvasMaterial( {
 
-					color:  0x8F8F8F,
+					color:  0x131313,
 					program: function ( context ) {
 
 						context.beginPath();
@@ -106,7 +106,8 @@
 
 					geometry.vertices.push( vertex2 );
 
-					var line = new THREE.Line( geometry, new THREE.LineBasicMaterial( { color: 0xffffff, opacity: Math.random() } ) );
+					var line = new THREE.Line( geometry, new THREE.LineBasicMaterial( {
+						color: 0x0D0301, linewidth: 3, opacity: Math.random() } ) );
 					scene.add( line );
 				}
 
@@ -177,6 +178,8 @@
 			}
 
 			function render() {
+
+				renderer.setClearColor( 0x00e0ff, 1); //
 
 				camera.position.x += ( mouseX - camera.position.x ) * .05;
 				camera.position.y += ( - mouseY + 200 - camera.position.y ) * .05;
