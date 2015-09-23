@@ -59,6 +59,7 @@
       particle.position.normalize();
       particle.position.multiplyScalar( Math.random() * 10 + 450 );
       particle.scale.multiplyScalar( 2 );
+      particle.scale.x = particle.scale.y = 3;
       scene.add( particle );
 
       geometry.vertices.push( particle.position );
