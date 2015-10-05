@@ -10,10 +10,19 @@
 		<div class="gradientHolder"></div>
 		<script src="vis/build/three.min.js"></script>
 		<script>
+
 			(function(){
 				  var scene = new THREE.Scene(); //Create scene
 				  var camera = new THREE.PerspectiveCamera(80, window.innerWidth/window.innerHeight, 0.1, 1000); //Create camera
 				  camera.position.z = 4; //Set camera position
+					//Amb light
+					scene.add( new THREE.AmbientLight( 0xffffff ) );
+
+					//Dir light
+					var dirLight = new THREE.DirectionalLight(0xb2b2b2, 1);
+    			dirLight.position.set(100, 100, 50);
+    			scene.add(dirLight);
+
 
 				  var renderer = new THREE.WebGLRenderer({antialias: true});
 
@@ -24,18 +33,30 @@
 				  document.body.appendChild(renderer.domElement);
 
 					//Create geometry and set material
-				  var geometry = new THREE.SphereGeometry(1,2,1);
-				  var material = new THREE.MeshBasicMaterial({color: 0xaed2ef, wireframe: true});
-				  var shape = new THREE.Mesh(geometry, material);
+				  //var geometry = new THREE.SphereGeometry(2,2,2);
+					var geometry = new THREE.CubeGeometry(2,2,2);
+					var material = new THREE.MeshBasicMaterial({color: 0xaed2ef});
+					var redMat = new THREE.MeshPhongMaterial( { color: 0xFFA500, specular: 0x555555, shininess: 30 } );
+
+					//	var material = new THREE.shaderMaterial(color: 0xaed2ef);
+
+					var shape = new THREE.Mesh(geometry, redMat);
 				  scene.add(shape); //Add shapes to scene
 
 					//Render function
 				  var render = function () {
 						var time = Date.now();
+
 				    requestAnimationFrame(render);
+
 						renderer.setClearColor( 0x000000, 1);
+
+						renderer.shadowMap.enable = true;
+						renderer.shadowMapSoft = true;
+						renderer.shadowMap.type = THREE.PCFShadowMap;
+
 				    shape.rotation.x += 0.02;
-				    shape.rotation.y += 0.08;
+				    shape.rotation.y += 0.008;
 
 						//Render scene
 				    renderer.render(scene, camera);

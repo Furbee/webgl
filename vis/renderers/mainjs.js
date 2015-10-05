@@ -78,8 +78,9 @@
 
     window.addEventListener( 'resize', onWindowResize, false );
     */
-    //lines
 
+
+    //Line
     for (var i = 0; i < 300; i++) {
 
       var geometry = new THREE.Geometry();
