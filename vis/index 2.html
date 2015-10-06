@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>TFYA65 - Ljudprojekt</title>
+    
+</head>
+
+<body>
+    <script src="scripts/audio.js" async></script>
+    <script src="scripts/visualiser.js" async></script>
+    <script src="scripts/app.js" async></script>
+    <div class="wrapper">
+    	<form class="controls">
+          <div>
+            <label for="filter">Filter setting</label>
+            <select id="filter" name="filter">
+              <option value="distortion">Distortion</option>
+              <option value="convolver">Reverb</option>
+              <option value="biquad">Bass Boost</option>
+              <option value="off" selected>Off</option>
+            </select>
+         </div>
+		</form>
+        <canvas class="visualiser" </canvas>
+    </div>
+
+</body>
+
+</html>

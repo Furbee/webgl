@@ -4,23 +4,17 @@
 		<title>waves</title>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
-		<style>
-			body {
-				background-color: #000000;
-				margin: 0px;
-				overflow: hidden;
-			}
-
-			a {
-				color:#0078ff;
-			}
-		</style>
 	</head>
+
 	<body>
+
 		<script src="build/three.min.js"></script>
 		<script src="renderers/Projectors.js"></script>
 		<script src="renderers/CanvasRenderer.js"></script>
 		<script src="js/stats.min.js"></script>
+		<script src="scripts/audio.js" async></script>
+		<script src="scripts/visualiser.js" async></script>
+		<script src="scripts/app.js" async></script>
 
 		<script>
 
@@ -123,7 +117,6 @@
 					mouseY = event.touches[ 0 ].pageY - windowHalfY;
 
 				}
-
 			}
 
 			function onDocumentTouchMove( event ) {
@@ -136,7 +129,6 @@
 					mouseY = event.touches[ 0 ].pageY - windowHalfY;
 
 				}
-
 			}
 
 			function animate() {
@@ -145,24 +137,11 @@
 			}
 
 			function render() {
+
 				camera.position.x += ( mouseX - camera.position.x ) * .05;
 				camera.position.y += ( - mouseY - camera.position.y ) * .05;
 				camera.lookAt( scene.position );
 				renderer.setClearColor( 0x007cbc, 1);
-
-				
-				var i = 0;
-				for ( var ix = 0; ix < AMOUNTX; ix ++ ) {
-
-					for ( var iy = 0; iy < AMOUNTY; iy ++ ) {
-
-						particle = particles[ i++ ];
-						particle.position.y = ( Math.sin( ( ix + count ) * 0.3 ) * 50 ) +
-							( Math.sin( ( iy + count ) * 0.5 ) * 50 );
-						particle.scale.x = particle.scale.y = ( Math.sin( ( ix + count ) * 0.3 ) + 1 ) * 4 +
-							( Math.sin( ( iy + count ) * 0.5 ) + 1 ) * 4;
-					}
-				}
 
 				renderer.render( scene, camera );
 
