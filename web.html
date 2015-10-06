@@ -35,14 +35,19 @@
 					//Create geometry and set material
 				  //var geometry = new THREE.SphereGeometry(2,2,2);
 					var geometry = new THREE.CubeGeometry(2,2,2);
+					var geometry2 = new THREE.CubeGeometry(1,1,1);
+
 					var material = new THREE.MeshBasicMaterial({color: 0xaed2ef});
-					var redMat = new THREE.MeshPhongMaterial( { color: 0xFFA500, specular: 0x555555, shininess: 30 } );
+					var orgMat = new THREE.MeshPhongMaterial({ color: 0xff8d00, specular: 0x555555, shininess: 30,
+						wireframe: true, wireframeLinewidth: '10'});
+					var graMat = new THREE.MeshPhongMaterial({ color: 0x636363, specular: 0x929292, shininess: 30 });
 
 					//	var material = new THREE.shaderMaterial(color: 0xaed2ef);
 
-					var shape = new THREE.Mesh(geometry, redMat);
+					var shape = new THREE.Mesh(geometry, orgMat);
+					var shape2 = new THREE.Mesh(geometry2, graMat);
 				  scene.add(shape); //Add shapes to scene
-
+					scene.add(shape2);
 					//Render function
 				  var render = function () {
 						var time = Date.now();
@@ -57,6 +62,9 @@
 
 				    shape.rotation.x += 0.02;
 				    shape.rotation.y += 0.008;
+
+						shape2.rotation.x += -0.02;
+				    shape2.rotation.y += -0.008;
 
 						//Render scene
 				    renderer.render(scene, camera);
