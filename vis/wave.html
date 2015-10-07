@@ -33,6 +33,9 @@
 			init();
 			animate();
 
+
+
+			//FUNCTIONS
 			function init() {
 
 				container = document.createElement( 'div' );
@@ -54,9 +57,7 @@
 						context.beginPath();
 						context.arc( 0, 0, 0.5, 0, PI2, true );
 						context.fill();
-
 					}
-
 				} );
 
 				//Create particles
@@ -69,7 +70,6 @@
 						particle.position.z = iy * SEPARATION - ( ( AMOUNTY * SEPARATION ) / 2 );
 						scene.add( particle );
 					}
-
 				}
 
 				//Create container and renderer
@@ -78,13 +78,11 @@
 				renderer.setSize( window.innerWidth, window.innerHeight );
 				container.appendChild( renderer.domElement );
 
-
 				document.addEventListener( 'mousemove', onDocumentMouseMove, false );
 				document.addEventListener( 'touchstart', onDocumentTouchStart, false );
 				document.addEventListener( 'touchmove', onDocumentTouchMove, false );
 
 				window.addEventListener( 'resize', onWindowResize, false );
-
 			}
 
 			function onWindowResize() {
@@ -96,15 +94,12 @@
 				camera.updateProjectionMatrix();
 
 				renderer.setSize( window.innerWidth, window.innerHeight );
-
 			}
-
 
 			function onDocumentMouseMove( event ) {
 
 				mouseX = event.clientX - windowHalfX;
 				mouseY = event.clientY - windowHalfY;
-
 			}
 
 			function onDocumentTouchStart( event ) {
@@ -115,7 +110,6 @@
 
 					mouseX = event.touches[ 0 ].pageX - windowHalfX;
 					mouseY = event.touches[ 0 ].pageY - windowHalfY;
-
 				}
 			}
 
@@ -127,7 +121,6 @@
 
 					mouseX = event.touches[ 0 ].pageX - windowHalfX;
 					mouseY = event.touches[ 0 ].pageY - windowHalfY;
-
 				}
 			}
 
@@ -146,7 +139,6 @@
 				renderer.render( scene, camera );
 
 				count += 0.1;
-
 			}
 
 		</script>
