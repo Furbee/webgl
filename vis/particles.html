@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 	<head>
 		<title>tfya065-projekt</title>
 		<meta charset="utf-8">
@@ -11,38 +11,29 @@
 		<script src="build/three.min.js"></script>
 		<script src="renderers/Projectors.js"></script>
 		<script src="renderers/CanvasRenderer.js"></script>
-		<script src="js/stats.min.js"></script>
-		<script src="scripts/audio.js" async></script>
-		<script src="scripts/visualiser.js" async></script>
-		<script src="scripts/app.js" async></script>
 
 		<script>
 
-			var SEPARATION = 100, AMOUNTX = 50, AMOUNTY = 50;
-
-			var container;
-			var camera, scene, renderer;
-
-			var particles, particle, count = 0;
-
-			var mouseX = 0, mouseY = 0;
-
+			var  AMOUNTX = AMOUNTY = 50;
 			var windowHalfX = window.innerWidth / 2;
 			var windowHalfY = window.innerHeight / 2;
+			var container;
+			var camera, scene, renderer;
+			var particles, particle, count = 0;
+			var mouseX = mouseY = 0;
+			var h = 0;
 
 			init();
 			animate();
 
-
-
-			//FUNCTIONS
+			/* FUNCTIONS */
 			function init() {
 
 				container = document.createElement( 'div' );
 				document.body.appendChild( container );
 
 				camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 1, 10000 );
-				camera.position.z = 1000;
+				camera.position.z = 1200;
 
 				scene = new THREE.Scene();
 
@@ -62,6 +53,7 @@
 
 				//Create particles
 				var i = 0;
+				var SEPARATION = 50;
 
 				for ( var ix = 0; ix < AMOUNTX; ix ++ ) {
 					for ( var iy = 0; iy < AMOUNTY; iy ++ ) {
@@ -72,12 +64,14 @@
 					}
 				}
 
-				//Create container and renderer
+
+				//Create container and set renderer
 				renderer = new THREE.CanvasRenderer();
 				renderer.setPixelRatio( window.devicePixelRatio );
 				renderer.setSize( window.innerWidth, window.innerHeight );
 				container.appendChild( renderer.domElement );
 
+				//Moving camera
 				document.addEventListener( 'mousemove', onDocumentMouseMove, false );
 				document.addEventListener( 'touchstart', onDocumentTouchStart, false );
 				document.addEventListener( 'touchmove', onDocumentTouchMove, false );
@@ -85,6 +79,7 @@
 				window.addEventListener( 'resize', onWindowResize, false );
 			}
 
+			//From http://learningthreejs.com/data/THREEx/docs/THREEx.WindowResize.html
 			function onWindowResize() {
 
 				windowHalfX = window.innerWidth / 2;
@@ -130,15 +125,22 @@
 			}
 
 			function render() {
+				camera.position.x = 50;
+				camera.position.y = 50
 
-				camera.position.x += ( mouseX - camera.position.x ) * .05;
-				camera.position.y += ( - mouseY - camera.position.y ) * .05;
 				camera.lookAt( scene.position );
 				renderer.setClearColor( 0x007cbc, 1);
+				var j = 0;
+				for ( var ix = 0; ix < AMOUNTX; ix ++ ) {
+					for ( var iy = 0; iy < AMOUNTY; iy ++ ) {
+						h += 0.1;
+  				  particle = particles[j++];
+						particle.position.y = ( Math.sin(( j + h)));
+				    particle.scale.x = particle.scale.y = 2;
+				  }
+				}
 
 				renderer.render( scene, camera );
-
-				count += 0.1;
 			}
 
 		</script>
