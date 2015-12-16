@@ -21,7 +21,6 @@
 			var camera, scene, renderer;
 			var particles, particle, count = 0;
 			var mouseX = mouseY = 0;
-			var h = 0;
 
 			init();
 			animate();
@@ -128,15 +127,18 @@
 				camera.position.x = 50;
 				camera.position.y = 50
 
-				camera.lookAt( scene.position );
+				camera.position.x += ( mouseX - camera.position.x ) * .05;
+				camera.position.y += ( - mouseY - camera.position.y ) * .05;
+
+				//camera.lookAt( scene.position );
 				renderer.setClearColor( 0x007cbc, 1);
 				var j = 0;
 				for ( var ix = 0; ix < AMOUNTX; ix ++ ) {
 					for ( var iy = 0; iy < AMOUNTY; iy ++ ) {
-						h += 0.1;
   				  particle = particles[j++];
-						particle.position.y = ( Math.sin(( j + h)));
-				    particle.scale.x = particle.scale.y = 2;
+						particle.position.y = 1;
+				    particle.scale.x = 1;
+						particle.scale.y = 1;
 				  }
 				}
 
